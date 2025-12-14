@@ -1,0 +1,3 @@
+alias pip="docker exec -w /opt/python app pip"
+alias python="docker exec -w /opt/python app python"
+alias pytest="docker exec -w /opt/python app pytest tests"

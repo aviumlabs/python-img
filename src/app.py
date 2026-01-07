@@ -14,7 +14,6 @@
 
 
 def main():
-    # Read file
     print("Avium Labs Test Library...")
 
 if __name__ == "__main__":

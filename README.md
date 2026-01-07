@@ -4,25 +4,48 @@ This is a Python Docker image based on the Python Alpine Linux docker image.
 
 ## Build an Image
 
+### Build Default - APP_NAME=app
+
+```shell
+export APP_NAME=app
+```
+
 **Regular build**  
 ```shell
-docker build --no-cache -t aviumlabs/python:latest-alpine .
+docker build --pull --no-cache -t aviumlabs/python:3.14-alpine .
 ```
 
 **Build with sbom and provenance** 
 ```shell
-docker build --no-cache -t aviumlabs/python:latest-alpine --provenance=mode=max --sbom=true .
+docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --provenance=mode=max --sbom=true .
+```
+
+### Build Specified - APP_NAME=
+
+```shell
+export APP_NAME=myapp
+```
+
+**Regular build**  
+```shell
+docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --build-arg APP_NAME=$APP_NAME .
+```
+
+**Build with sbom and provenance** 
+```shell
+docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --build-arg APP_NAME=$APP_NAME --provenance=mode=max --sbom=true .
 ```
 
 ## Run
 
 Run container in the foreground:  
+
 ```shell
-export APP_NAME=app
+docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.14-alpine
 ```
 
 ```shell
-docker run --name app -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:latest-alpine
+docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.14-alpine
 ```
 
 Open an additional container shell:  
@@ -46,8 +69,8 @@ The three aliases are:
 * python  
 * pytest  
 
-If you need to run `pip`, `python`, or `pytest` in the container, source one 
-of the script files prior to running the command. I.e.,  
+If you need to run `pip`, `python`, or `pytest` in the container, source the 
+alias file prior to running the command:    
 
 ```shell
 . ./.appdev
@@ -135,13 +158,13 @@ python -m build
 ### Pytest Integrated
 
 The environment has integrated support for `pytest`. Create your **test** 
-files in the test directory and run pytest in the docker container.
+files in the `tests` directory and run pytest in the docker container.
 
 ```shell
 . ./.appdev
 ```
 
-Run standard pytest:
+Run standard pytest:  
 ```shell
 pytest 
 ```
@@ -154,4 +177,12 @@ pytest -s
 To run specific test file with output:  
 ```shell
 pytest -s tests/test_<file_name>.py
+```
+
+## Interal
+
+### Push Docker Image
+
+```shell
+docker push aviumlabs/python:3.14-alpine
 ```

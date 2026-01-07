@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
-FROM python:3.14-alpine3.23
+FROM python:3.14-alpine
 
-ENV WORKDIR=/opt/python/app
+ARG APP_NAME="app"
+ENV WORKDIR=/opt/python/${APP_NAME}
 ENV VIRTUAL_ENV=/opt/python/venv
 ENV BUILD_ENV=/opt/python
 

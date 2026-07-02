@@ -3,6 +3,10 @@
 This is a Python Docker image based on the Python Alpine Linux docker image.
 
 ## Recent Updates
+**2026-07-01**
+* Updated stack:
+  * Alpine Linux 3.24
+  * PostgreSQL client 18.4
 
 **2026-06-14**
 * Updated stack:

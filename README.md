@@ -7,26 +7,6 @@ This is a Python Docker image based on the Python Alpine Linux docker image.
 * Updated stack:
   * Python 3.14.10
 
-**2026-07-01**
-* Updated stack:
-  * Alpine Linux 3.24
-  * PostgreSQL client 18.4
-
-**2026-06-14**
-* Updated stack:
-  * Python 3.14.6
-
-**2026-05-16**
-* Updated stack:
-  * Python 3.14.5
-
-**2026-04-17**
-* Updated stack:
-  * Python 3.14.4
-  * PostgreSQL client 18.3
-  * Alpine Linux 3.23.4
-
-
 ## Build an Image
 
 ### Build Default - APP_NAME=app

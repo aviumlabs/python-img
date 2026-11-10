@@ -7,8 +7,8 @@ ENV VIRTUAL_ENV=/opt/python/venv
 ENV BUILD_ENV=/opt/python
 
 RUN set -eux; \
-   addgroup -g 935 -S python; \
-   adduser -u 935 -S -D -G python -H -h /opt/python -s /bin/ash python; \
+   addgroup -g 955 -S python; \
+   adduser -u 955 -S -D -G python -H -h /opt/python -s /bin/ash python; \
    install --verbose --directory --owner python --group python --mode 1755 /opt/python
    
 RUN apk add --no-cache \

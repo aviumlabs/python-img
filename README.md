@@ -3,9 +3,9 @@
 This is a Python Docker image based on the Python Alpine Linux docker image.
 
 ## Recent Updates
-**2026-09-07**
+**2026-11-09**
 * Updated stack:
-  * Python 3.14.7
+  * Python 3.14.10
 
 **2026-07-01**
 * Updated stack:

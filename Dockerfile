@@ -16,6 +16,10 @@ RUN apk add --no-cache \
    fuse3 \
    postgresql18-client \
    inotify-tools \
+   build-base \
+   musl-dev \
+   python3-dev \
+   gcc \
    git
 
 USER python
@@ -33,4 +37,6 @@ COPY .gitignore "${BUILD_ENV}"
 COPY pyproject.toml "${BUILD_ENV}"
 COPY README.md "${BUILD_ENV}"
 
-CMD [ "python" ]
+EXPOSE 8888
+
+CMD [ "jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser" ]

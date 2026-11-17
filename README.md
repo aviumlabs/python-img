@@ -16,12 +16,12 @@ If using the default image the APP_NAME is `app`.
 
 **Regular build**  
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.15-alpine .
+docker build --pull --no-cache -t aviumlabs/python:3.15-lab-alpine .
 ```
 
 **Build with sbom and provenance** 
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.15-alpine --provenance=mode=max --sbom=true .
+docker build --pull --no-cache -t aviumlabs/python:3.15-lab-alpine --provenance=mode=max --sbom=true .
 ```
 
 ### Building an Image with a Specific App Name 
@@ -32,12 +32,12 @@ export APP_NAME=myapp
 
 **Regular build**  
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.15-alpine --build-arg APP_NAME=$APP_NAME .
+docker build --pull --no-cache -t aviumlabs/python:3.15-lab-alpine --build-arg APP_NAME=$APP_NAME .
 ```
 
 **Build with sbom and provenance** 
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.15-alpine --build-arg APP_NAME=$APP_NAME --provenance=mode=max --sbom=true .
+docker build --pull --no-cache -t aviumlabs/python:3.15-lab-alpine --build-arg APP_NAME=$APP_NAME --provenance=mode=max --sbom=true .
 ```
 
 ## Run
@@ -49,14 +49,26 @@ export APP_NAME=app
 ```
 
 ```shell
-docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.15-alpine
+docker run --name $APP_NAME -p 8888:8888 -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.15-lab-alpine
 ```
+During the container startup, the login URL will be printed out:
 
-Open an additional container shell:  
+>  
+> http://127.0.0.1:8888/lab?token=<string>
+>  
 
-```shell
-docker exec -it $APP_NAME /bin/ash
-```
+Copy this URL to access the Juptyer Lab environment in a browser.
+
+## JupyterLab
+
+After opening JuptyerLab in a broswer, you'll see the landing page. 
+
+To start a new Notebook:
+- Select Launcher > Notebook > Python 3
+
+When you save a Notebook, it is saved to the src directory be default, which is a bind
+mounted diretory on your local hard drive.
+
 
 ## Design 
 
@@ -93,6 +105,9 @@ and their dependencies:
 * loguru
 * pytest
 * python-dateuitl
+* jupyterlab
+* pydantic
+* langchain
 
 
 This file may be deleted and recreated with project specific requirements.  
@@ -181,12 +196,12 @@ pytest -s
 To run specific test file with output:  
 ```shell
 pytest -s tests/test_<file_name>.py
-```
+```   
 
 ## Interal
 
 ### Push Docker Image
 
 ```shell
-docker push aviumlabs/python:3.15-alpine
+docker push aviumlabs/python:3.15-lab-alpine
 ```

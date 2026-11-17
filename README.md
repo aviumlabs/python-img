@@ -69,8 +69,9 @@ To start a new Notebook:
 When you save a Notebook, it is saved to the src directory be default, which is a bind
 mounted diretory on your local hard drive.
 
+## Archive
 
-## Design 
+### Design 
 
 The src directory is bind mounted into the Docker container and the 
 container provides the Python runtime environment.   
@@ -146,14 +147,16 @@ pip install <package>
 pip freeze > requirements.txt
 ```
 
-## Development Environment
+### Development Environment
+
+This is carry over from the base image and would not be used in this environment.
 
 Modify the pyproject.toml file to meet your requirements. 
 
 **Recommendation is to not use spaces or special characters in the name and keep it short.**
 
 
-### Coding
+#### Coding
 
 All of the code for the application is in the `src/` directory and it is 
 stored on your computer's local filesystem and not in the docker container.
@@ -161,7 +164,7 @@ stored on your computer's local filesystem and not in the docker container.
 Use your favorite editor to write your application code.
 
 
-### Build a Package
+#### Build a Package
 
 The environment has built in support for building a package. The `dist` 
 directory is bind mounted into the container, and running `build` will 
@@ -174,7 +177,7 @@ create a python package in the `dist` directory on your local filesystem.
 python -m build
 ```
 
-### Pytest Integrated
+#### Pytest Integrated
 
 The environment has integrated support for `pytest`. Create your **test** 
 files in the `tests` directory and run pytest in the docker container.

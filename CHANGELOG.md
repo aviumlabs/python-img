@@ -1,5 +1,9 @@
 # CHANGELOG
 
+**2026-11-16**
+* Updated stack:
+  * Python 3.15.2
+
 **2026-11-09**
 * Updated stack:
   * Python 3.14.10

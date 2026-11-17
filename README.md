@@ -4,9 +4,9 @@ This is a Python Docker image based on the Python Alpine Linux docker image.
 GitHub URL: https://github.com/aviumlabs/python-img
 
 ## Recent Updates
-**2026-11-09**
+**2026-11-16**
 * Updated stack:
-  * Python 3.14.10
+  * Python 3.15.2
 
 ## Build an Image
 
@@ -16,12 +16,12 @@ If using the default image the APP_NAME is `app`.
 
 **Regular build**  
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.14-alpine .
+docker build --pull --no-cache -t aviumlabs/python:3.15-alpine .
 ```
 
 **Build with sbom and provenance** 
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --provenance=mode=max --sbom=true .
+docker build --pull --no-cache -t aviumlabs/python:3.15-alpine --provenance=mode=max --sbom=true .
 ```
 
 ### Building an Image with a Specific App Name 
@@ -32,12 +32,12 @@ export APP_NAME=myapp
 
 **Regular build**  
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --build-arg APP_NAME=$APP_NAME .
+docker build --pull --no-cache -t aviumlabs/python:3.15-alpine --build-arg APP_NAME=$APP_NAME .
 ```
 
 **Build with sbom and provenance** 
 ```shell
-docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --build-arg APP_NAME=$APP_NAME --provenance=mode=max --sbom=true .
+docker build --pull --no-cache -t aviumlabs/python:3.15-alpine --build-arg APP_NAME=$APP_NAME --provenance=mode=max --sbom=true .
 ```
 
 ## Run
@@ -49,7 +49,7 @@ export APP_NAME=app
 ```
 
 ```shell
-docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.14-alpine
+docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.15-alpine
 ```
 
 Open an additional container shell:  
@@ -188,5 +188,5 @@ pytest -s tests/test_<file_name>.py
 ### Push Docker Image
 
 ```shell
-docker push aviumlabs/python:3.14-alpine
+docker push aviumlabs/python:3.15-alpine
 ```

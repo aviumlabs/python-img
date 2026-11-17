@@ -9,11 +9,9 @@ This is a Python Docker image based on the Python Alpine Linux docker image.
 
 ## Build an Image
 
-### Build Default - APP_NAME=app
+### Default Image Build
 
-```shell
-export APP_NAME=app
-```
+If using the default image the APP_NAME is `app`. 
 
 **Regular build**  
 ```shell
@@ -25,7 +23,7 @@ docker build --pull --no-cache -t aviumlabs/python:3.14-alpine .
 docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --provenance=mode=max --sbom=true .
 ```
 
-### Build Specified - APP_NAME=
+### Building an Image with a Specific App Name 
 
 ```shell
 export APP_NAME=myapp
@@ -43,10 +41,10 @@ docker build --pull --no-cache -t aviumlabs/python:3.14-alpine --build-arg APP_N
 
 ## Run
 
-Run container in the foreground:  
+Running the default image:  
 
 ```shell
-docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/src",target="/opt/python/$APP_NAME" --mount type=bind,src="$(pwd)/tests",target="/opt/python/tests" --mount type=bind,src="$(pwd)/dist",target="/opt/python/dist" aviumlabs/python:3.14-alpine
+export APP_NAME=app
 ```
 
 ```shell
@@ -56,7 +54,7 @@ docker run --name $APP_NAME -it -e APP_NAME=$APP_NAME --rm -w "/opt/python/$APP_
 Open an additional container shell:  
 
 ```shell
-docker exec -it app /bin/ash
+docker exec -it $APP_NAME /bin/ash
 ```
 
 ## Design 

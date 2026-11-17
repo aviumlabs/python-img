@@ -1,13 +1,13 @@
 function Invoke-Pip {
-    docker exec app pip
+    docker exec $env:APP_NAME pip
 }
 
 function Invoke-Python {
-    docker exec -w /opt/python app python
+    docker exec -w /opt/python $env:APP_NAME python
 }
 
 function Invoke-Pytest {
-    docker exec -w /opt/python app pytest tests
+    docker exec -w /opt/python $env:APP_NAME pytest tests
 }
 
 Set-Alias -Name pip -Value Invoke-Pip
